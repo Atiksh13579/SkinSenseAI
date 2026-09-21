@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SkinSense — Know What's On Your Skin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --forest:  #0d2b1e;
+  --forest2: #163d2b;
+  --mint:    #c8f0d8;
+  --mint2:   #e8f9ef;
+  --blush:   #f7d4bc;
+  --blush2:  #fdf0e8;
+  --offwhite:#f9f7f4;
+  --ink:     #0d2b1e;
+  --mid:     #4a6b58;
+  --light:   #8aad98;
+  --r:       16px;
+  --r2:      28px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--offwhite);color:var(--ink);overflow-x:hidden;}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 6%;background:rgba(13,43,30,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(200,240,216,.1);}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;letter-spacing:-.3px;}
+.nav-logo span{color:var(--mint);font-style:italic}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.88rem;font-weight:500;color:rgba(255,255,255,.75);transition:color .2s;}
+.nav-links a:hover{color:var(--mint)}
+.nav-cta{background:var(--mint);color:var(--forest);padding:.55rem 1.4rem;border-radius:50px;font-size:.85rem;font-weight:600;transition:background .2s,transform .15s;}
+.nav-cta:hover{background:#a8e4bc;transform:translateY(-1px)}
+.hero{min-height:100vh;background:var(--forest);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:7rem 6% 4rem;gap:3rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(200,240,216,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,240,216,.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+.hero-text{position:relative;z-index:2}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(200,240,216,.1);border:1px solid rgba(200,240,216,.2);border-radius:50px;padding:.35rem .9rem;font-size:.78rem;font-weight:500;color:var(--mint);margin-bottom:1.8rem;letter-spacing:.3px;}
+.hero-eyebrow svg{width:14px;height:14px;fill:var(--mint)}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4rem);color:#fff;line-height:1.12;letter-spacing:-.5px;margin-bottom:1.4rem;}
+h1 em{color:var(--mint);font-style:italic}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:480px;margin-bottom:2.2rem;font-weight:300;}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn-primary{background:var(--mint);color:var(--forest);padding:.8rem 2rem;border-radius:50px;font-size:.95rem;font-weight:600;display:inline-flex;align-items:center;gap:.5rem;transition:all .2s;box-shadow:0 4px 24px rgba(200,240,216,.25);}
+.btn-primary:hover{background:#a8e4bc;transform:translateY(-2px);box-shadow:0 8px 32px rgba(200,240,216,.35)}
+.btn-ghost{color:rgba(255,255,255,.7);font-size:.92rem;font-weight:400;display:inline-flex;align-items:center;gap:.4rem;border-bottom:1px solid rgba(255,255,255,.2);padding-bottom:1px;transition:color .2s;}
+.btn-ghost:hover{color:#fff}
+.hero-visual{position:relative;z-index:2;display:flex;justify-content:center;align-items:center;height:480px;}
+.bubble-ring{position:absolute;border:1px solid rgba(200,240,216,.15);border-radius:50%;}
+.bubble-ring:nth-child(1){width:380px;height:380px}
+.bubble-ring:nth-child(2){width:280px;height:280px}
+.bubble-ring:nth-child(3){width:180px;height:180px}
+.center-jar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--mint2),var(--mint));display:flex;align-items:center;justify-content:center;font-size:3rem;z-index:3;position:relative;box-shadow:0 0 60px rgba(200,240,216,.3);}
+.ing-bubble{position:absolute;background:rgba(22,61,43,.85);border:1px solid rgba(200,240,216,.2);backdrop-filter:blur(8px);border-radius:50px;padding:.4rem .9rem;font-size:.78rem;color:var(--mint);font-weight:500;white-space:nowrap;animation:float 6s ease-in-out infinite;}
+.ing-bubble:nth-child(5){top:12%;left:8%;animation-delay:0s}
+.ing-bubble:nth-child(6){top:20%;right:5%;animation-delay:1s}
+.ing-bubble:nth-child(7){bottom:28%;left:2%;animation-delay:2s}
+.ing-bubble:nth-child(8){bottom:18%;right:8%;animation-delay:.5s}
+.ing-bubble:nth-child(9){top:50%;left:-2%;animation-delay:1.5s}
+.ing-bubble:nth-child(10){top:42%;right:0%;animation-delay:2.5s}
+.ing-bubble.bad{color:#ffb3a7;border-color:rgba(255,179,167,.2);background:rgba(60,20,15,.85)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.trust-strip{background:var(--forest2);padding:1.2rem 6%;display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;border-bottom:1px solid rgba(200,240,216,.08);}
+.trust-item{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(255,255,255,.55);font-weight:400;}
+.trust-item strong{color:rgba(255,255,255,.85);font-weight:600}
+.section{padding:5.5rem 6%}
+.section-head{text-align:center;margin-bottom:3.5rem}
+.section-head h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);color:var(--ink);line-height:1.2;margin-bottom:.7rem;}
+.section-head p{font-size:1rem;color:var(--mid);max-width:520px;margin:0 auto;line-height:1.7;font-weight:300;}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;max-width:900px;margin:0 auto;}
+.step-card{background:#fff;border-radius:var(--r2);padding:2rem 1.8rem;border:1px solid rgba(13,43,30,.08);position:relative;transition:transform .2s,box-shadow .2s;}
+.step-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(13,43,30,.1)}
+.step-num{font-family:'Playfair Display',serif;font-size:3rem;color:var(--mint);line-height:1;margin-bottom:.8rem;font-style:italic;}
+.step-card h3{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:.5rem;}
+.step-card p{font-size:.88rem;color:var(--mid);line-height:1.65;font-weight:300}
+.features-section{background:var(--forest);padding:5.5rem 6%}
+.features-section .section-head h2{color:#fff}
+.features-section .section-head p{color:rgba(255,255,255,.6)}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;max-width:1000px;margin:0 auto;}
+.feat{background:rgba(255,255,255,.04);border:1px solid rgba(200,240,216,.12);border-radius:var(--r2);padding:1.8rem;transition:background .2s;}
+.feat:hover{background:rgba(200,240,216,.06)}
+.feat-icon{width:44px;height:44px;border-radius:12px;background:rgba(200,240,216,.12);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem;}
+.feat h3{font-size:.97rem;font-weight:600;color:#fff;margin-bottom:.45rem}
+.feat p{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.65;font-weight:300}
+.preview-section{background:var(--blush2);padding:5.5rem 6%}
+.preview-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center;}
+.preview-text h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);line-height:1.25;margin-bottom:1rem;color:var(--ink);}
+.preview-text p{font-size:.95rem;color:var(--mid);line-height:1.75;font-weight:300;margin-bottom:1.5rem;}
+.sample-card{background:#fff;border-radius:var(--r2);padding:1.6rem 1.8rem;box-shadow:0 8px 40px rgba(13,43,30,.08);}
+.sample-product{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--ink);margin-bottom:.3rem}
+.sample-brand{font-size:.78rem;color:var(--light);margin-bottom:1rem}
+.rating-row{display:flex;align-items:center;gap:.6rem;margin-bottom:1.2rem;}
+.rating-badge{background:var(--forest);color:var(--mint);font-size:.82rem;font-weight:700;padding:.3rem .8rem;border-radius:50px;}
+.rating-label{font-size:.82rem;color:var(--mid)}
+.ing-row{margin-bottom:.9rem}
+.ing-row-label{font-size:.68rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--light);margin-bottom:.4rem;}
+.ing-pills{display:flex;flex-wrap:wrap;gap:.35rem}
+.pill{padding:.25rem .65rem;border-radius:50px;font-size:.75rem;font-weight:500;}
+.pill-good{background:#dcfce7;color:#166534}
+.pill-bad{background:#fee2e2;color:#991b1b}
+.pill-ok{background:#f3f4f6;color:#4b5563}
+.verdict{font-size:.82rem;color:var(--mid);line-height:1.6;border-top:1px solid #f0ece8;padding-top:.9rem;margin-top:.5rem;font-style:italic;}
+.cta-section{background:var(--forest);padding:6rem 6%;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,240,216,.08),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:1rem;position:relative;}
+.cta-section p{color:rgba(255,255,255,.6);font-size:1rem;max-width:480px;margin:0 auto 2.2rem;font-weight:300;line-height:1.7;position:relative;}
+.btn-large{background:var(--mint);color:var(--forest);padding:1rem 2.8rem;border-radius:50px;font-size:1.05rem;font-weight:700;display:inline-flex;align-items:center;gap:.6rem;transition:all .2s;box-shadow:0 6px 32px rgba(200,240,216,.3);position:relative;}
+.btn-large:hover{background:#a8e4bc;transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,240,216,.4)}
+.cta-note{margin-top:1.2rem;font-size:.8rem;color:rgba(255,255,255,.35);position:relative;}
+footer{background:#091f15;padding:2rem 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(200,240,216,.06);}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.2rem;color:rgba(255,255,255,.6);}
+.foot-logo span{color:var(--mint);font-style:italic}
+.foot-note{font-size:.78rem;color:rgba(255,255,255,.3)}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding-top:6rem;text-align:center}
+  .hero-desc{max-width:100%}
+  .hero-actions{justify-content:center}
+  .hero-visual{height:300px}
+  .bubble-ring:nth-child(1){width:260px;height:260px}
+  .bubble-ring:nth-child(2){width:190px;height:190px}
+  .bubble-ring:nth-child(3){width:120px;height:120px}
+  .center-jar{width:80px;height:80px;font-size:2rem}
+  .ing-bubble{font-size:.7rem;padding:.3rem .7rem}
+  .trust-strip{gap:1.5rem}
+  .preview-inner{grid-template-columns:1fr}
+  nav .nav-links{display:none}
+  footer{flex-direction:column;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .ing-bubble{animation:none}
+  *{transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Skin<span>Sense</span></div>
+  <ul class="nav-links">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#preview">See it in action</a></li>
+  </ul>
+  <a class="nav-cta" href="https://skinsenseai-ibey6wc2skkgceykd2szvn.streamlit.app" target="_blank">Open App ↗</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2zm1 14.93V17a1 1 0 0 1-2 0v-.07A8 8 0 0 1 4.07 11H5a1 1 0 0 1 0 2h-.93A8.001 8.001 0 0 1 11 4.07V5a1 1 0 0 1 2 0v-.93A8 8 0 0 1 19.93 11H19a1 1 0 0 1 0-2h.93A8.001 8.001 0 0 1 13 16.93z"/></svg>
+      AI-powered skincare intelligence
+    </div>
+    <h1>Know exactly what's <em>on</em> your skin</h1>
+    <p class="hero-desc">Scan any skincare label, paste ingredients, or decode a QR code — SkinSense tells you which ingredients help your skin, which to avoid, and recommends better products in your budget.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://skinsenseai-ibey6wc2skkgceykd2szvn.streamlit.app" target="_blank">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+        Analyse My Product
+      </a>
+      <a class="btn-ghost" href="#how">See how it works ↓</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="bubble-ring"></div>
+    <div class="bubble-ring"></div>
+    <div class="bubble-ring"></div>
+    <div class="center-jar">🧴</div>
+    <div class="ing-bubble">✅ Niacinamide</div>
+    <div class="ing-bubble">✅ Hyaluronic Acid</div>
+    <div class="ing-bubble bad">⚠️ Alcohol Denat</div>
+    <div class="ing-bubble">✅ Ceramides</div>
+    <div class="ing-bubble bad">⚠️ Fragrance</div>
+    <div class="ing-bubble">✅ Vitamin C</div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="trust-item"><strong>500+</strong> ingredients in our database</div>
+  <div class="trust-item"><strong>6</strong> product categories analysed</div>
+  <div class="trust-item"><strong>AI-powered</strong> by Claude (Anthropic)</div>
+  <div class="trust-item"><strong>Free</strong> to use, no sign-up needed</div>
+</div>
+
+<section class="section" id="how">
+  <div class="section-head">
+    <h2>Three steps to smarter skincare</h2>
+    <p>No dermatologist appointment needed. Just your product and 30 seconds.</p>
+  </div>
+  <div class="steps">
+    <div class="step-card"><div class="step-num">1</div><h3>Add your product</h3><p>Upload a photo of the label, scan the QR code on the packaging, or paste the ingredients list directly.</p></div>
+    <div class="step-card"><div class="step-num">2</div><h3>Tell us your skin</h3><p>Select your skin type — oily, dry, sensitive, acne-prone — and the concerns you want to address.</p></div>
+    <div class="step-card"><div class="step-num">3</div><h3>Get your analysis</h3><p>See a rating, a breakdown of good and harmful ingredients, and better product recommendations in your budget.</p></div>
+  </div>
+</section>
+
+<section class="features-section" id="features">
+  <div class="section-head">
+    <h2>Everything you need to decode a label</h2>
+    <p>Built for real skincare shoppers — not chemists.</p>
+  </div>
+  <div class="features">
+    <div class="feat"><div class="feat-icon">📷</div><h3>Photo scanning</h3><p>Supports JPG, PNG, WEBP, HEIC, TIFF and more. Just photograph the back of any bottle.</p></div>
+    <div class="feat"><div class="feat-icon">📲</div><h3>QR code reader</h3><p>Scan the product's QR code — SkinSense visits the page and extracts ingredients automatically.</p></div>
+    <div class="feat"><div class="feat-icon">⭐</div><h3>Product rating</h3><p>Every product gets a score out of 10 based on how its ingredients match your skin profile.</p></div>
+    <div class="feat"><div class="feat-icon">✅</div><h3>Good vs harmful</h3><p>Each ingredient is flagged as beneficial, concerning, or neutral — with a clear reason why.</p></div>
+    <div class="feat"><div class="feat-icon">🛍️</div><h3>Better alternatives</h3><p>Get 6 recommended products across moisturiser, serum, SPF and more — filtered to your budget in ₹.</p></div>
+    <div class="feat"><div class="feat-icon">💊</div><h3>Category breakdown</h3><p>Recommendations are organised by product type — face wash, toner, eye cream — so nothing overlaps.</p></div>
+  </div>
+</section>
+
+<section class="preview-section" id="preview">
+  <div class="preview-inner">
+    <div class="preview-text">
+      <h2>See a real analysis in seconds</h2>
+      <p>This is what SkinSense produces for a typical moisturiser for oily, acne-prone skin. Clear, honest, and built around your skin — not the brand's marketing.</p>
+      <a class="btn-primary" style="display:inline-flex;" href="https://skinsenseai-ibey6wc2skkgceykd2szvn.streamlit.app" target="_blank">Try it on your product ↗</a>
+    </div>
+    <div class="sample-card">
+      <div class="sample-product">Neutrogena Hydro Boost</div>
+      <div class="sample-brand">Water Gel Moisturiser</div>
+      <div class="rating-row"><span class="rating-badge">7.5 / 10</span><span class="rating-label">Good for oily skin</span></div>
+      <div class="ing-row"><div class="ing-row-label">✅ Beneficial</div><div class="ing-pills"><span class="pill pill-good">Hyaluronic Acid</span><span class="pill pill-good">Glycerin</span><span class="pill pill-good">Dimethicone</span></div></div>
+      <div class="ing-row"><div class="ing-row-label">⚠️ Concerning</div><div class="ing-pills"><span class="pill pill-bad">Fragrance</span><span class="pill pill-bad">PEG-100 Stearate</span></div></div>
+      <div class="ing-row"><div class="ing-row-label">〰️ Neutral</div><div class="ing-pills"><span class="pill pill-ok">Carbomer</span><span class="pill pill-ok">Phenoxyethanol</span></div></div>
+      <div class="verdict">"Good hydration for oily skin but the added fragrance may trigger breakouts. Consider a fragrance-free alternative."</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Your skin deserves better information</h2>
+  <p>Free to use. No account needed. Just bring your product.</p>
+  <a class="btn-large" href="https://skinsenseai-ibey6wc2skkgceykd2szvn.streamlit.app" target="_blank">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg>
+    Open SkinSense App
+  </a>
+  <div class="cta-note">Powered by Claude AI · Built as a Capstone Project</div>
+</section>
+
+<footer>
+  <div class="foot-logo">Skin<span>Sense</span></div>
+  <div class="foot-note">For informational purposes only. Not medical advice.</div>
+</footer>
+
+</body>
+</html>
